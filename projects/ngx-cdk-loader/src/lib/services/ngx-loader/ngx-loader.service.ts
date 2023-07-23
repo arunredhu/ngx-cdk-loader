@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, shareReplay } from 'rxjs';
+import { BehaviorSubject, Observable, shareReplay, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NgxLoaderService {
+  private get isLoading() {
+    return this.isLoading$.getValue();
+  }
+
   loading$: Observable<boolean>;
 
   private isLoading$ = new BehaviorSubject(false);
@@ -14,10 +18,14 @@ export class NgxLoaderService {
   }
 
   showLoader() {
-    this.isLoading$.next(true);
+    if (!this.isLoading) {
+      this.isLoading$.next(true);
+    }
   }
 
   hideLoader() {
-    this.isLoading$.next(false);
+    if (this.isLoading) {
+      this.isLoading$.next(false);
+    }
   }
 }
