@@ -40,6 +40,8 @@ import { NgxCdkLoaderModule } from 'ngx-cdk-loader';
 export class AppModule { }
 ```
 
+When you import `NgxCdkLoaderModule` to your application, it will automatically enable the `NgxLoaderHttpInterceptor` i.e. you don't have to add it explicitly in the application providers. This is a http interceptor which intercepts each http request made through Angular [`HttpClient`](https://angular.io/api/common/http/HttpClient) and keeps the track of total pending requests which are waiting for the response. Based on pending requests, it updates the state of loader in `NgxLoaderService` service i.e. when a request is made, it set the state of loading as `true` and when it `completes`, `cancelled` or the specified timeout happens, it set the state as `false`. This state from `NgxLoaderService` can be used in your app to hide/show the loader.
+
 ##### Configuration
 
 `forRoot` method can be used to pass the custom configurations to the `ngx-cdk-loader`. If you don't pass any configuration, then default configuration will be used. Below are the supported configurations
@@ -66,6 +68,10 @@ export class AppModule { }
 ```
 
 > Note: Never call a `forRoot` static method in the `SharedModule`
+
+#### `NgxLoaderHttpInterceptor` as `HttpInterceptor`:
+
+
 
 ## NgxLoaderService
 
