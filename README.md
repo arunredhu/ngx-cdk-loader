@@ -1,3 +1,5 @@
+# This library is under development. Please don't use as of now. (In Draft Stage)
+
 # NgxCdkLoader
 
 `ngx-cdk-loader` module provides the services & directive to manage the state of the loader within the Angular application. Please note that this package doesn't provide any UI loader element. You can make your own reusable UI loader component using this loader CDK.
@@ -6,7 +8,7 @@
 
 It becomes very important for any frontend application to show/hide the loader based on some async tasks i.e. loading data from server using an API. This module automatically manages the state of loader based on that if there is any network api response is pending or not. It provide a service which contain the reactive state and methods to control the state of the loader and a http interceptor which update the loader state based on the APIs. It also provide a directive which can be applied to a loader element (Some HTML Element or Angular Component such as Progress bar etc) to show/hide that element automatically based on the loader state.
 
-## Installation
+## Installation (In Draft Stage)
 
 You need to install the npm module:
 
