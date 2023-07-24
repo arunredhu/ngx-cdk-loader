@@ -69,17 +69,41 @@ export class AppModule { }
 
 > Note: Never call a `forRoot` static method in the `SharedModule`
 
-#### `NgxLoaderHttpInterceptor` as `HttpInterceptor`:
+#### Use `NgxLoaderService` to show/hide the loader
 
+`NgxLoaderService` service is responsible to manage the state of the loader in the app. This service expose an observable which emits the state whenever there is any change in the state and exposes 2 methods to update the state.
 
+Inject the `NgxLoaderService` service to any `component|directive` and use the `loading$` observable to listen to the loading state values.
+
+```ts
+ngxLoaderService.loading$.subscribe((loading: boolean) => {
+  if (loading) {
+    // show the loader
+  } else {
+    // hide the loader
+  }
+});
+```
+
+or you can directly use `async` pipe to `html` templates to show/hide your loader
+
+```html
+<div *ngIf="ngxLoaderService.loading$ | async">Loading...</div>
+```
+
+In case, you want to control the state of loader in the by your own. You can use `showLoader` or `hideLoader` methods of the service to update the state.
+
+```ts
+ngxLoaderService.showLoader();
+```
+
+```ts
+ngxLoaderService.hideLoader();
+```
 
 ## NgxLoaderService
 
-This service is responsible to manage the state of the loader in the app. This service expose an observable which emits the state whenever there is any change in the state and exposes 2 methods to update the state.
 
-## NgxLoaderHttpInterceptor
-
-This is a Http interceptor which can be added to any angular application. This act as a middleware to intercept the Http request made throught angular `HttpClient`. This http intercept keep trace of the pending request whose response is awaited from the server and based on that it updates the loader state in `NgxLoaderService` using `showLoader` or `hideLoader` methods.
 
 ## NgxCdkLoaderDirective
 
