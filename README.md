@@ -69,7 +69,7 @@ export class AppModule { }
 
 ##### Bypass `NgxLoaderHttpInterceptor`
 
-Sometimes, there can be a use case where a developer don't want to use the global loader state for a specific API call and want to manage its own state for loader. In that case, the developer want to bypass the `NgxLoaderHttpInterceptor` for a specific http request. This can be easily done with the help of `customHeaders` in the http request. `x-supress-ngx-loader` property can be set on [`HttpHeaders`](https://angular.io/api/common/http/HttpHeaders) to supress the global loader for a particular request. 
+Sometimes, there can be a use case where a developer don't want to use the global loader state for a specific API call and want to manage its own state for loader. In that case, the developer want to bypass the `NgxLoaderHttpInterceptor` for that specific http request. This can be easily done with the help of `customHeaders` in the http request. `x-supress-ngx-loader` property can be set on [`HttpHeaders`](https://angular.io/api/common/http/HttpHeaders) to supress the global loader for a particular request. 
 
 ```ts
 let httpHeaders = new HttpHeaders();
