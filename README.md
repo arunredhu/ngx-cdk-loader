@@ -67,6 +67,21 @@ import { NgxCdkLoaderModule } from 'ngx-cdk-loader';
 export class AppModule { }
 ```
 
+##### Bypass `NgxLoaderHttpInterceptor`
+
+Sometimes, there can be a use case where a developer don't want to use the global loader state for a specific API call and want to manage its own state for loader. In that case, the developer want to bypass the `NgxLoaderHttpInterceptor` for a specific http request. This can be easily done with the help of `customHeaders` in the http request. `x-supress-ngx-loader` property can be set on [`HttpHeaders`](https://angular.io/api/common/http/HttpHeaders) to supress the global loader for a particular request. 
+
+```ts
+let httpHeaders = new HttpHeaders();
+httpHeaders = httpHeaders.append('x-supress-ngx-loader', 'true');
+this.http
+  .get('<Your API URL>', {
+      headers: httpHeaders,
+  });
+```
+
+`NgxLoaderHttpInterceptor` uses this header property and pass the request to the next handler without any change in state of loader. Also, this custom header property will be automatically removed and will not be further passed to next `handlers/server`
+
 > Note: Never call a `forRoot` static method in the `SharedModule`
 
 #### Use `NgxLoaderService` to show/hide the loader
@@ -91,7 +106,7 @@ or you can directly use `async` pipe to `html` templates to show/hide your loade
 <div *ngIf="ngxLoaderService.loading$ | async">Loading...</div>
 ```
 
-In case, you want to control the state of loader in the by your own. You can use `showLoader` or `hideLoader` methods of the service to update the state.
+In case, you want to control the state of loader by your own. You can use `showLoader` or `hideLoader` methods of the service to update the state.
 
 ```ts
 ngxLoaderService.showLoader();
@@ -100,10 +115,6 @@ ngxLoaderService.showLoader();
 ```ts
 ngxLoaderService.hideLoader();
 ```
-
-## NgxLoaderService
-
-
 
 ## NgxCdkLoaderDirective
 
